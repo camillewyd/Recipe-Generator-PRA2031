@@ -4,7 +4,7 @@ import pandas as pd
 input_file = "recipes_extended.csv"
 
 # Path to save the new filtered CSV
-output_file = "final_filtered_recipes.csv"
+output_file = "final_filtered_recipes(10columns).csv"
 
 # Columns to keep
 columns_to_keep = [
@@ -14,7 +14,8 @@ columns_to_keep = [
     "directions",
     "num_ingredients",
     "num_steps",
-    "cook_speed",
+    "est_prep_time_min",
+    "est_cook_time_min",
     "dietary_profile",
     "healthiness_score",
     "health_level"
