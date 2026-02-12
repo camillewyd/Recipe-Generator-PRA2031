@@ -5,31 +5,30 @@ df = pd.read_csv("final_filtered_recipes.csv")
 
 #recepies and health score 
 
-def plot_recipes_vs_health(recipes):
+def plot_recipes_vs_health(df, recipe_titles):
     """
-    Plots recipe titles vs their health scores.
+    Plots recipe titles vs healthiness score using the 'healthiness_score' column in the DataFrame.
 
     Parameters:
-    recipes (list): List of Recipe objects with a health_score attribute
+    df (pandas.DataFrame): DataFrame containing your recipe data
+    recipe_titles (list): List of recipe titles to plot
     """
-    # Filter out recipes with missing health_score
-    recipes_with_score = [r for r in recipes if r.health_score is not None]
+    # Filter DataFrame to only include selected recipes
+    filtered_df = df[df['recipe_title'].isin(recipe_titles)]
 
-    if not recipes_with_score:
-        print("No health scores available to plot.")
+    if filtered_df.empty:
+        print("No recipes found in DataFrame for plotting.")
         return
 
-    titles = [r.title for r in recipes_with_score]
-    scores = [r.health_score for r in recipes_with_score]
-
     plt.figure(figsize=(10, 6))
-    plt.bar(titles, scores, color='lightgreen')
+    plt.bar(filtered_df['recipe_title'], filtered_df['healthiness_score'], color='lightgreen')
     plt.xlabel('Recipe')
-    plt.ylabel('Health Score')
-    plt.title('Recipes vs Health Score')
+    plt.ylabel('Healthiness Score')
+    plt.title('Recipes vs Healthiness Score')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
+
 
 # Recepies and number of steps 
 
@@ -57,6 +56,32 @@ def plot_recipes_vs_num_steps(df, recipe_titles):
     plt.xlabel('Recipe')
     plt.ylabel('Number of Steps')
     plt.title('Recipes vs Number of Steps')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
+
+#recipes and number of ingredients 
+
+def plot_recipes_vs_num_ingredients(df, recipe_titles):
+    """
+    Plots recipe titles vs number of ingredients using the 'num_ingredients' column in the DataFrame.
+
+    Parameters:
+    df (pandas.DataFrame): DataFrame containing your recipe data
+    recipe_titles (list): List of recipe titles to plot
+    """
+    # Filter DataFrame to only include selected recipes
+    filtered_df = df[df['recipe_title'].isin(recipe_titles)]
+
+    if filtered_df.empty:
+        print("No recipes found in DataFrame for plotting.")
+        return
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(filtered_df['recipe_title'], filtered_df['num_ingredients'], color='lightblue')
+    plt.xlabel('Recipe')
+    plt.ylabel('Number of Ingredients')
+    plt.title('Recipes vs Number of Ingredients')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
