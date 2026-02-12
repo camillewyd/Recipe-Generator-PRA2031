@@ -1,6 +1,9 @@
-# plot_recipes.py
-
 import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv("final_filtered_recipes.csv")
+
+#recepies and health score 
 
 def plot_recipes_vs_health(recipes):
     """
@@ -27,3 +30,35 @@ def plot_recipes_vs_health(recipes):
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
+
+# Recepies and number of steps 
+
+# plot_recipes.py
+
+import matplotlib.pyplot as plt
+
+def plot_recipes_vs_num_steps(df, recipe_titles):
+    """
+    Plots recipe titles vs number of steps using the 'num_steps' column in the DataFrame.
+
+    Parameters:
+    df (pandas.DataFrame): DataFrame containing your recipe data
+    recipe_titles (list): List of recipe titles to plot
+    """
+    # Filter DataFrame to only include selected recipes
+    filtered_df = df[df['recipe_title'].isin(recipe_titles)]
+
+    if filtered_df.empty:
+        print("No recipes found in DataFrame for plotting.")
+        return
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(filtered_df['recipe_title'], filtered_df['num_steps'], color='coral')
+    plt.xlabel('Recipe')
+    plt.ylabel('Number of Steps')
+    plt.title('Recipes vs Number of Steps')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
+
+  
