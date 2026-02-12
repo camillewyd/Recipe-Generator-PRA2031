@@ -7,7 +7,7 @@ class Ingredient:
     def __repr__(self):
         return self.name
 
-
+# The aim of class Recipe: "Test for commit"
 class Recipe:
     def __init__(self, title, ingredients, directions, diet_tags=None):
         self.title = title
