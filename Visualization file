@@ -1,0 +1,22 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the CSV file
+df = pd.read_csv("final_filtered_recipes.csv")
+
+# Show first 5 rows
+print(df.head())
+
+
+
+plt.figure()
+plt.bar(matched_recipes["recipe"], matched_recipes["health_score"])
+
+plt.xlabel("Recipes")
+plt.ylabel("Health Score")
+plt.title("Health Score of Matching Recipes")
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+plt.show()
