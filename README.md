@@ -13,11 +13,11 @@
 * [Acknowledgments](#acknowledgements)
 * [Contact](#contact)
   
-### Purpose
+## Purpose
 We built the Recipe Generator with the aim to simplify everyday cooking by helping users turn available ingredients into suitable and healthy recipes, regardless of their dietary needs or cooking experience. We undertook this project specifically because, as students, we often struggle to decide what to cook with limited ingredients and thought it would be a very useful program to have.
 
-### Features
-## Classes
+## Features
+# Classes
 - Ingredients
 - Dietary restriction
 - Healthiness score
@@ -25,20 +25,20 @@ We built the Recipe Generator with the aim to simplify everyday cooking by helpi
   
 > To keep the project organized, each class was created in its own file. These classes are then imported and used together in a main file, which controls the overall program flow.
 
-### Setup
+## Setup
 - 
 
-### Usage
+## Usage
 -
 
-### Visualizations
+## Visualizations
 
 
-### Project Status
+## Project Status
 _in progress_
 
-### Future Directions/Improvements
+## Future Directions/Improvements
 - 
 
-### Contact
+## Contact
 Created by [@camillewyd](https://www.camillewyd.pl/), [@antoniaosorio123-sudo](https://www.antoniaosorio123-sudo.pl/), [@abrahamjessica1170-dev](https://www.abrahamjessica1170-dev.pl/), [@joana66-jpg](https://www.joana66-jpg.pl/), and [@bezuidenhoutxena](https://www.bezuidenhoutxena.pl/) - feel free to contact us!
