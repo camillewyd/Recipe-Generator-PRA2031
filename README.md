@@ -1,5 +1,5 @@
 # Recipe Generator - Project PRA2031
-> This project is a recipe generator built in Python using object-oriented programming (OOP) principles. The program allows users to input their available ingredients and specify dietary restrictions. Based on these inputs, the application generates a selection of suitable dishes, displays their respective healthiness scores in a graph format, and enables the user to choose a preferred dish. Once selected, the full recipe is presented to the user.
+> This project is a recipe generator built in Python using object oriented programming (OOP) principles. The program allows users to input their available ingredients and specify dietary restrictions. Based on these inputs, the application generates a selection of suitable dishes, displays their respective healthiness scores in a graph format, and enables the user to choose a preferred dish. Once selected, the full recipe is presented to the user.
 
 ## Table of Contents
 * [Purpose](#purpose)
