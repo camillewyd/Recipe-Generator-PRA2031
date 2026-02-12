@@ -8,7 +8,8 @@ df.columns = df.columns.str.strip()
 all_diet_tags = set()
 
 for profiles in df["dietary_profile"].dropna():
-    tags = str(profiles).split(",")
+    clean_str = str(profiles).strip("[]").replace("'","").replace('"','')
+    tags = clean_str.split(",")
 
     for tag in tags:
         clean_tag = tag.strip().lower()
