@@ -14,7 +14,7 @@
 * [Contact](#contact)
   
 ### Purpose
-- We built the Recipe Generator with the aim to simplify everyday cooking by helping users turn available ingredients into suitable and healthy recipes, regardless of their dietary needs or cooking experience. We undertook this project specifically because, as students, we often struggle to decide what to cook with limited ingredients and thought it would be a very useful program to have.
+We built the Recipe Generator with the aim to simplify everyday cooking by helping users turn available ingredients into suitable and healthy recipes, regardless of their dietary needs or cooking experience. We undertook this project specifically because, as students, we often struggle to decide what to cook with limited ingredients and thought it would be a very useful program to have.
 
 ### Features
 ## Classes
