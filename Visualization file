@@ -1,22 +1,29 @@
-import pandas as pd
+# plot_recipes.py
+
 import matplotlib.pyplot as plt
 
-# Read the CSV file
-df = pd.read_csv("final_filtered_recipes.csv")
+def plot_recipes_vs_health(recipes):
+    """
+    Plots recipe titles vs their health scores.
 
-# Show first 5 rows
-print(df.head())
+    Parameters:
+    recipes (list): List of Recipe objects with a health_score attribute
+    """
+    # Filter out recipes with missing health_score
+    recipes_with_score = [r for r in recipes if r.health_score is not None]
 
+    if not recipes_with_score:
+        print("No health scores available to plot.")
+        return
 
+    titles = [r.title for r in recipes_with_score]
+    scores = [r.health_score for r in recipes_with_score]
 
-plt.figure()
-plt.bar(matched_recipes["recipe"], matched_recipes["health_score"])
-
-plt.xlabel("Recipes")
-plt.ylabel("Health Score")
-plt.title("Health Score of Matching Recipes")
-
-plt.xticks(rotation=45)
-plt.tight_layout()
-
-plt.show()
+    plt.figure(figsize=(10, 6))
+    plt.bar(titles, scores, color='lightgreen')
+    plt.xlabel('Recipe')
+    plt.ylabel('Health Score')
+    plt.title('Recipes vs Health Score')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
