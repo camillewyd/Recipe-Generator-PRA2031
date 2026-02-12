@@ -5,9 +5,9 @@ df = pd.read_csv("final_filtered_recipes.csv")
 
 #recepies and health score 
 
-def plot_recipes_vs_health(df, recipe_titles):
+def plot_recipes_vs_health_with_levels(df, recipe_titles):
     """
-    Plots recipe titles vs healthiness score using the 'healthiness_score' column in the DataFrame.
+    Plots recipe titles vs healthiness score and shows healthiness level under each bar.
 
     Parameters:
     df (pandas.DataFrame): DataFrame containing your recipe data
@@ -20,12 +20,32 @@ def plot_recipes_vs_health(df, recipe_titles):
         print("No recipes found in DataFrame for plotting.")
         return
 
+    scores = filtered_df['healthiness_score']
+    titles = filtered_df['recipe_title']
+
+    # Map healthiness levels
+    def health_level(score):
+        if score < 50:
+            return "Unhealthy"
+        elif 50 <= score < 80:
+            return "Moderate"
+        else:
+            return "Healthy"
+
+    levels = [health_level(s) for s in scores]
+
     plt.figure(figsize=(10, 6))
-    plt.bar(filtered_df['recipe_title'], filtered_df['healthiness_score'], color='lightgreen')
+    bars = plt.bar(titles, scores, color='lightgreen')
     plt.xlabel('Recipe')
     plt.ylabel('Healthiness Score')
     plt.title('Recipes vs Healthiness Score')
     plt.xticks(rotation=45, ha='right')
+
+    # Add healthiness level as text under each bar
+    for bar, level in zip(bars, levels):
+        plt.text(bar.get_x() + bar.get_width()/2, -5, level, ha='center', va='top', rotation=45, fontsize=9)
+
+    plt.ylim(0, 110)  # add some space for labels below zero
     plt.tight_layout()
     plt.show()
 
