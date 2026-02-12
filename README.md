@@ -17,14 +17,19 @@ This project...
 -
 
 ### Setup
+- include classes (in different files) 
 
 ### Usage
+- 
 
 ### Project Status
 _in progress_
 
 ### Future Directions/Improvements
+- 
 
 ### Acknowledgements
+- 
 
 ### Contact
+- 
