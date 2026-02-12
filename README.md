@@ -16,5 +16,15 @@ This project...
 ### Features
 -
 
+### Setup
+
+### Usage
+
 ### Project Status
 _in progress_
+
+### Future Directions/Improvements
+
+### Acknowledgements
+
+### Contact
