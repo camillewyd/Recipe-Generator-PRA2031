@@ -3,14 +3,12 @@
 
 ## Table of Contents
 * [Purpose](#purpose)
-* [General Info](#general-info)
 * [Features](#features)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Visualizations](#visualizations)
 * [Project Status](#project-status)
 * [Future Directions](#future-directions)
-* [Acknowledgments](#acknowledgements)
 * [Contact](#contact)
   
 ## Purpose
