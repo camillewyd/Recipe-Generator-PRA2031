@@ -8,7 +8,7 @@
 * [Usage](#usage)
 * [Visualizations](#visualizations)
 * [Project Status](#project-status)
-* [Future Directions](#future-directions)
+* [Future Directions/Improvements](#future-directions/Improvements)
 * [Contact](#contact)
   
 ## Purpose
