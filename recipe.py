@@ -16,6 +16,8 @@ class Recipe:
         self.directions = directions #list of steps 
         self.health_score=health_score
         self.diet_tags = diet_tags or []
+        self.health_level = health_level
+        self.num_steps = len(directions)
 
     def match_score(self, available_ingredients):
         """
@@ -70,6 +72,7 @@ class Recipe:
                 #Split directions by "|"
                 directions_list=row["directions"].split("|")
                 health_score=row["health_score"]
+                health_level = row["health_level"]
 
                 #optional diet tags column 
                 diet_tags=row.get("diet_tags", "")
@@ -80,6 +83,7 @@ class Recipe:
                     ingredients_list,
                     directions_list,
                     health_score,
+                    health level,
                     diet_tags_list
                 )
                 recipes.append(recipe)
