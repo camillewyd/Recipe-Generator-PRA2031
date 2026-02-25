@@ -62,10 +62,7 @@ Follow these steps to run the Recipe Generator locally:
 
 2. When prompted, enter the ingredients you currently have available.
    - Ingredients must be separated by commas.
-   - Example:
-     ```
-     chicken, rice, tomato, onion
-     ```
+   - Example: chicken, rice, tomato, onion
 
 3. The program will:
    - Load recipes from the CSV file
