@@ -94,4 +94,4 @@ _in progress_
 - **Expand the Recipe Database**: Increase the number and diversity of recipes, including international cuisines and more specialized dietary categories 
 
 ## Contact
-Created by [@camillewyd](https://www.camillewyd.pl/), [@antoniaosorio123-sudo](https://www.antoniaosorio123-sudo.pl/), [@abrahamjessica1170-dev](https://www.abrahamjessica1170-dev.pl/), [@joana66-jpg](https://www.joana66-jpg.pl/), and [@bezuidenhoutxena](https://www.bezuidenhoutxena.pl/) - feel free to contact us!
+Created by [@camillewyd], [@antoniaosorio123-sudo](https://www.antoniaosorio123-sudo.pl/), [@abrahamjessica1170-dev](https://www.abrahamjessica1170-dev.pl/), [@joana66-jpg](https://www.joana66-jpg.pl/), and [@bezuidenhoutxena](https://www.bezuidenhoutxena.pl/) - feel free to contact us!
