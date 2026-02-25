@@ -33,30 +33,19 @@ Follow these steps to run the Recipe Generator locally:
    cd Recipe-Generator-PRA2031
    ```
 
-2. Make sure Python 3.9+ is installed:
+2. Make sure Python 3.9 or newer is installed:
    ```bash
    python --version
    ```
 
-3. Create and activate a virtual environment:
-
-   Mac/Linux:
+3. Install required library:
    ```bash
-   python -m venv venv
-   source venv/bin/activate
+   pip install pandas
    ```
 
-   Windows:
-   ```bash
-   python -m venv venv
-   venv\Scripts\activate
-   ```
-
-4. Install required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   (If no requirements.txt file is included, install needed libraries manually, e.g. `pip install matplotlib`.)
+4. Ensure the dataset file  
+   `final_filtered_recipes.csv`  
+   is located inside the project folder.
 
 5. Run the program:
    ```bash
@@ -65,6 +54,33 @@ Follow these steps to run the Recipe Generator locally:
 
 ## Usage
 
+1. Run the program:
+
+   ```bash
+   python main.py
+   ```
+
+2. When prompted, enter the ingredients you currently have available.
+   - Ingredients must be separated by commas.
+   - Example:
+     ```
+     chicken, rice, tomato, onion
+     ```
+
+3. The program will:
+   - Load recipes from the CSV file
+   - Compare your ingredients to each recipe
+   - Calculate how many ingredients match
+   - Sort recipes by best match
+
+4. The top 3 best matching recipes (or fewer if less are available) will be displayed.
+
+5. For each suggested recipe, the program shows:
+   - Full ingredient list
+   - Missing ingredients (if any)
+   - Step by step directions
+
+If no matches are found, the program will suggest entering more common ingredients.
 
 ## Visualizations
 
