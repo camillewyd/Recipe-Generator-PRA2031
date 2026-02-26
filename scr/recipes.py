@@ -4,20 +4,23 @@ import csv
 from typing import List, Optional
 from ingredients import Ingredient
 
+
 # RECIPE CLASS: represents a recipe with title, ingredients, directions, health score, and optional diet tags
 class Recipe:
 
     def __init__(
             self, 
             title: str,
-            ingredients: List[    Ingredient],
+            ingredients: List[Ingredient], 
             directions: List[str],
             health_score: float,
             health_level: str,
-            diet_tags: Optional[list[str]]=None):
+            diet_tags: Optional[list[str]]=None,
+            raw_ingredients: Optional[list[str]] = None):
         
         self.title = title
         self.ingredients = ingredients #List of ingredient objects 
+        self.raw_ingredients = raw_ingredients or [] #List of ingredient names as strings, for easier matching
         self.directions = directions #list of steps 
         self.health_score= float(health_score)
         self.health_level=health_level  
@@ -35,7 +38,11 @@ class Recipe:
 
     def missing_ingredients(self, available_ingredients: List[Ingredient]) -> List[str]:
         available_names = [i.name for i in available_ingredients]
-        return [ing.name for ing in self.ingredients if ing.name not in available_names]
+
+        if self.raw_ingredients:
+            return [ing for ing in self.raw_ingredients if ing not in available_names]
+        else:
+            return [ing.name for ing in self.ingredients if ing.name not in available_names]
 
     def display(self, available_ingredients: List[Ingredient]) -> None:
         print(f"\nRecipe: {self.title}")
@@ -44,8 +51,12 @@ class Recipe:
             print(f"Diet Tags: {', '.join(self.diet_tags)}")
 
         print("Ingredients:")
-        for ing in self.ingredients:
-            print(f"- {ing.name}")
+        if self.raw_ingredients:
+            for ing in self.raw_ingredients:
+                print(f"- {ing}")
+        else:
+            for ing in self.ingredients:
+                print(f"- {ing.name}")
 
         missing = self.missing_ingredients(available_ingredients)
         if missing:
@@ -71,20 +82,17 @@ def load_recipes_from_csv(file_path):
 
         for row in reader:
             title = row["recipe_title"]          # not "title"
-            ingredients_raw = row["ingredients"] # string like "[""3/4 cup ketchup"", ...]"
             directions_raw = row["directions"]   # same style list string
             health_score = float(row["healthiness_score"])
             health_level = row["health_level"]
+            ingredients_raw = row["ingredients"]
 
-            # parse ingredients list string
-            # remove [ ], quotes, then split on comma
-            cleaned = (
-                ingredients_raw.strip()[1:-1]   # remove outer [ ]
-                .replace('""', '"')            # collapse double quotes
-                .replace('"', '')              # remove quotes
-            )
-            ingredient_names = [x.strip() for x in cleaned.split(",") if x.strip()]
-            ingredients_list = [Ingredient(name) for name in ingredient_names]
+        
+             # 1) Build a list of original strings (with quantities)
+            inner = ingredients_raw.strip()[1:-1].replace('""', '"')
+            raw_items = [s.strip() for s in inner.split('",') if s.strip()]
+            raw_ingredients_list = [s.strip().strip('"').strip() for s in raw_items] 
+            ingredients_list = [Ingredient(name) for name in raw_ingredients_list]
 
             # parse directions list string
             directions_clean = (
@@ -106,6 +114,7 @@ def load_recipes_from_csv(file_path):
 
             recipe = Recipe(
                 title=title,
+                raw_ingredients=raw_ingredients_list,
                 ingredients=ingredients_list,
                 directions=directions_list,
                 health_score=health_score,
