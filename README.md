@@ -79,8 +79,11 @@ Follow these steps to run the Recipe Generator locally:
 If no matches are found, the program will suggest entering more common ingredients.
 
 ## Visualizations
-
+> Examples of graphs shown to users 
+<h3>Healthiness Score Comparison of Suggested Recipes</h3>
 <img src="images/healthiness-score-graph.png" width="700">
+
+<h3>Comparison of Preparation Steps per Recipe</h3>
 <img src="images/number-of-steps-graph.png" width="700">
 
 ## Project Status
