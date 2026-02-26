@@ -83,7 +83,7 @@ If no matches are found, the program will suggest entering more common ingredien
 <h3>Healthiness Score Comparison of Suggested Recipes</h3>
 <img src="images/healthiness-score-graph.png" width="700">
 
-<h3>Comparison of Preparation Steps per Recipe</h3>
+<h2>Comparison of Preparation Steps per Recipe</h2>
 <img src="images/number-of-steps-graph.png" width="700">
 
 ## Project Status
