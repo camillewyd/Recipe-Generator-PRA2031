@@ -36,7 +36,7 @@ def generate_recipes(available_ingredients, all_recipes):
 
 
 def main():
-    csv_path = "final_filtered_recipes(10columns).csv"
+    csv_path = "filtered_recipes(10columns).csv"
 
     #Diet options
     diet_options = get_diet_options(csv_path)
