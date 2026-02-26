@@ -41,7 +41,7 @@ plt.bar(top_10["recipe_title"], top_10["num_steps"], color='skyblue')
 
 plt.xlabel("Recipe Title")
 plt.ylabel("Number of steps")
-plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
+plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.tight_layout()
@@ -102,7 +102,7 @@ bars = plt.bar(top_10["recipe_title"], top_10["healthiness_score"], color=bar_co
 
 plt.xlabel("Recipe Title")
 plt.ylabel("Healthiness Score")
-plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
+plt.title(f"Health level of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
 
@@ -152,7 +152,7 @@ plt.bar(top_10["recipe_title"], top_10["cook_speed_numeric"])
 
 plt.xlabel("Recipe Title")
 plt.ylabel("Cooking Speed")
-plt.title(f"Top 10 Recipes Matching: {', '.join(ingredients)}")
+plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.yticks([1, 2, 3], ["Slow", "Medium", "Fast"])
