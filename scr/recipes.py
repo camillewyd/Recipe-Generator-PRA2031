@@ -50,13 +50,17 @@ class Recipe:
         if self.diet_tags:
             print(f"Diet Tags: {', '.join(self.diet_tags)}")
 
-        print("Ingredients:")
+        print("Ingredients you have for this recipe:")
+        available_names = [i.name for i in available_ingredients]
+
         if self.raw_ingredients:
-            for ing in self.raw_ingredients:
-                print(f"- {ing}")
+            for ing_obj, raw in zip(self.ingredients, self.raw_ingredients):
+                if ing_obj.name in available_names:
+                    print(f"- {raw}")
         else:
             for ing in self.ingredients:
-                print(f"- {ing.name}")
+                if ing.name in available_names:
+                    print(f"- {ing.name}")
 
         missing = self.missing_ingredients(available_ingredients)
         if missing:
