@@ -80,10 +80,10 @@ If no matches are found, the program will suggest entering more common ingredien
 
 ## Visualizations
 > Examples of user interface visualizations 
-<h3>Healthiness Score Comparison of Suggested Recipes</h3>
+<h4>Healthiness Score Comparison of Suggested Recipes</h4>
 <img src="images/healthiness-score-graph.png" width="700">
 
-<h2>Comparison of Preparation Steps per Recipe</h2>
+<h4>Comparison of Preparation Steps per Recipe</h4>
 <img src="images/number-of-steps-graph.png" width="700">
 
 ## Project Status
