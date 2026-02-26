@@ -46,3 +46,68 @@ plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
 plt.show()
+
+
+#Graph 2: Repipes vs healthiness level 
+
+# Choose multiple ingredients
+
+ingredients = ["buter", "eggs", "sugar"]  # list of ingredients
+
+# Count how many selected ingredients each recipe contains
+
+def count_ingredients(recipe_ingredients):
+    recipe_ingredients_lower = str(recipe_ingredients).lower()
+    return sum(ingredient.lower() in recipe_ingredients_lower for ingredient in ingredients)
+
+df["ingredient_matches"] = df["ingredients"].apply(count_ingredients)
+
+# Filter recipes that have at least one of the ingredients
+
+filtered_df = df[df["ingredient_matches"] > 0]
+
+# Sort by number of matches and then by healthiness_score
+
+top_10 = (
+    filtered_df
+    .sort_values(by=["ingredient_matches", "healthiness_score"], ascending=[False, False])
+    .drop_duplicates(subset="recipe_title")
+    .head(10)
+)
+# Create health_level based on healthiness_score
+
+def classify_health(score):
+    if score >= 80:
+        return "Healthy"
+    elif score >= 50:
+        return "Moderate"
+    else:
+        return "Unhealthy"
+
+top_10["health_level"] = top_10["healthiness_score"].apply(classify_health)
+
+
+# Map health levels to colors
+color_map = {
+    "Healthy": "green",
+    "Moderate": "orange",
+    "Unhealthy": "red"
+}
+bar_colors = top_10["health_level"].map(color_map)
+
+# Plot Recipe vs Health Score with color by health level
+
+plt.figure(figsize=(12,6))
+bars = plt.bar(top_10["recipe_title"], top_10["healthiness_score"], color=bar_colors)
+
+plt.xlabel("Recipe Title")
+plt.ylabel("Healthiness Score")
+plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
+plt.xticks(rotation=75)
+plt.tight_layout()
+
+legend_elements = [Patch(facecolor=color, label=level) for level, color in color_map.items()]
+plt.legend(handles=legend_elements, title="Health Level")
+
+plt.show()
+
