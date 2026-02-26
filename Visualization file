@@ -41,7 +41,7 @@ plt.bar(top_10["recipe_title"], top_10["num_steps"], color='skyblue')
 
 plt.xlabel("Recipe Title")
 plt.ylabel("Number of steps")
-plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
+plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.tight_layout()
@@ -102,7 +102,7 @@ bars = plt.bar(top_10["recipe_title"], top_10["healthiness_score"], color=bar_co
 
 plt.xlabel("Recipe Title")
 plt.ylabel("Healthiness Score")
-plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
+plt.title(f"Health level of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
 
@@ -111,3 +111,51 @@ plt.legend(handles=legend_elements, title="Health Level")
 
 plt.show()
 
+
+#-----------------------------------
+# Graph 3: cooking speed
+#-----------------------------------
+
+speed_map = {
+    "slow": 1,
+    "medium": 2,
+    "fast": 3
+}
+
+df["cook_speed_numeric"] = df["cook_speed"].str.lower().map(speed_map)
+
+
+def count_ingredients(recipe_ingredients):
+    recipe_ingredients_lower = str(recipe_ingredients).lower()
+    return sum(ingredient.lower() in recipe_ingredients_lower for ingredient in ingredients)
+
+df["ingredient_matches"] = df["ingredients"].apply(count_ingredients)
+
+
+filtered_df = df[df["ingredient_matches"] > 0]
+
+#sort 
+
+top_10 = (
+    filtered_df
+    .sort_values(by=["ingredient_matches", "cook_speed_numeric"], ascending=[False, False])
+    .drop_duplicates(subset="recipe_title")
+    .head(10)
+)
+# Remove rows where cook_speed was missing
+top_10 = top_10.dropna(subset=["cook_speed_numeric"])
+
+# Plot
+
+plt.figure(figsize=(10,6))
+plt.bar(top_10["recipe_title"], top_10["cook_speed_numeric"])
+
+plt.xlabel("Recipe Title")
+plt.ylabel("Cooking Speed")
+plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
+
+plt.xticks(rotation=75)
+plt.yticks([1, 2, 3], ["Slow", "Medium", "Fast"])
+
+plt.tight_layout()
+plt.show()
