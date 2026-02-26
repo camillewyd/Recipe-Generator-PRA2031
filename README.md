@@ -49,7 +49,7 @@ Follow these steps to run the Recipe Generator locally:
 
 5. Run the program:
    ```bash
-   python main.py
+   python generator.py
    ```
 
 ## Usage
@@ -57,7 +57,7 @@ Follow these steps to run the Recipe Generator locally:
 1. Run the program:
 
    ```bash
-   python main.py
+   python generator.py
    ```
 
 2. When prompted, enter the ingredients you currently have available.
