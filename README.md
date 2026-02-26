@@ -80,8 +80,8 @@ If no matches are found, the program will suggest entering more common ingredien
 
 ## Visualizations
 
-![Healthiness Score Graph](images/healthiness-score-graph.png)
-![Number of Steps Graph](images/number-of-steps-graph.png)
+<img src="images/healthiness-score-graph.png" width="400">
+<img src="images/number-of-steps-graph.png" width="400">
 
 ## Project Status
 _in progress_
