@@ -85,9 +85,9 @@ If no matches are found, the program will suggest entering more common ingredien
 _in progress_
 
 ## Future Directions/Improvements
-- **Advanced Nutritional Analysis**: Integrate a nutritional API to provide detailed breakdowns (calories, macronutrients, micronutrients) instead of a simplified healthiness score.
-- **Machine Learning Integration**: Use recommendation algorithms to suggest recipes based on user history and behavior.
-- **Expand the Recipe Database**: Increase the number and diversity of recipes, including international cuisines and more specialized dietary categories 
+- **Advanced nutritional analysis**: Integrate a nutritional API to provide detailed breakdowns (calories, macronutrients, micronutrients) instead of a simplified healthiness score.
+- **Machine learning integration**: Use recommendation algorithms to suggest recipes based on user history and behavior.
+- **Expand the recipe database**: Increase the number and diversity of recipes, including international cuisines and more specialized dietary categories 
 
 ## Contact
 Created by @camillewyd, @antoniaosorio123-sudo, @abrahamjessica1170-dev, @joana66-jpg, and @bezuidenhoutxena - feel free to contact us!
