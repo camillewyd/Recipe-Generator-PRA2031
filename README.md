@@ -26,6 +26,9 @@ We built the Recipe Generator with the aim to simplify everyday cooking by helpi
   
 > To keep the project organized, each class was created in its own file. These classes are then imported and used together in a main file, which controls the overall program flow.
 
+## Data Description
+All data was obtained from Kaggle and filtered to fit Git size restrictions. 
+[Link text](https://www.kaggle.com/datasets/wafaaelhusseini/extended-recipes-dataset-64k-dishes?resource=download)
 
 ## Setup
 
