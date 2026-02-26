@@ -79,6 +79,10 @@ Follow these steps to run the Recipe Generator locally:
 If no matches are found, the program will suggest entering more common ingredients.
 
 ## Visualizations
+![Screenshot](file:///Users/antoniaosorio/Desktop/Screenshot%202026-02-26%20at%202.11.07%E2%80%AFPM.png)
+
+![Screenshot](file:///Users/antoniaosorio/Desktop/Screenshot%202026-02-26%20at%202.10.49%E2%80%AFPM.png)
+
 
 
 ## Project Status
