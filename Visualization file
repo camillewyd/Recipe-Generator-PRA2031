@@ -1,38 +1,48 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_path = "final_filtered_recipes.csv"   
+# Load dataset
+file_path = "final_filtered_recipes.csv"  # change path if needed
 df = pd.read_csv(file_path)
 
-# Graph 1: Repipes vs health score 
+#Graph 1: Recipes vs number of steps 
+#Example with chicken, broccoli, garlic and paprica
 
-ingredient = "chicken"   # change this to any ingredient you want
+# Choose ingredients
 
-filtered_df = df[df["ingredients"].str.contains(ingredient, case=False, na=False)] # filter recepies with this ingereient 
+ingredients = ["chicken", "broccoli", "garlic","paprica"]  # list of ingredients
 
 
-# Select top 10 by healthiness_score
+# Count how many selected ingredients each recipe contains
+def count_ingredients(recipe_ingredients):
+    recipe_ingredients_lower = str(recipe_ingredients).lower()
+    return sum(ingredient.lower() in recipe_ingredients_lower for ingredient in ingredients)
+
+df["ingredient_matches"] = df["ingredients"].apply(count_ingredients)
+
+# Filter recipes that have at least one of the ingredients
+
+filtered_df = df[df["ingredient_matches"] > 0]
+
+
+# Sort by number of matches and then by healthiness_score
 
 top_10 = (
     filtered_df
-    .sort_values(by="healthiness_score", ascending=False)
+    .sort_values(by=["ingredient_matches", "num_steps"], ascending=[False, False])
     .drop_duplicates(subset="recipe_title")   # optional: remove duplicate titles
     .head(10)
 )
 
-
 # Plot Recipe vs Health Score
 
 plt.figure(figsize=(10,6))
-plt.bar(top_10["recipe_title"], top_10["healthiness_score"])
+plt.bar(top_10["recipe_title"], top_10["num_steps"], color='skyblue')
 
 plt.xlabel("Recipe Title")
-plt.ylabel("Healthiness Score")
-plt.title(f"Top 10 {ingredient.capitalize()} Recipes by Healthiness Score")
+plt.ylabel("Number of steps")
+plt.title(f"Top 10 Recipes Matching Ingredients: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.tight_layout()
 plt.show()
-
-
-print(top_10[["recipe_title", "healthiness_score"]])
