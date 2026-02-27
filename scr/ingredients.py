@@ -1,8 +1,7 @@
+# ingredients.py
 """
-Ingredients Module
-Handles ingredient management with simplified categorization for the Recipe Generator.
-
-This module integrates with read_csv.py to work with ingredients from the recipe dataset.
+Handles ingredient management with simplified categorization .
+Integrates with read_csv.py to work with ingredients from the recipe dataset.
 """
 
 import re
@@ -12,10 +11,8 @@ from typing import List, Dict, Optional
 class Ingredient:
     """
     Represents a single ingredient with category classification.
-    
-    Attributes:
-        name (str): The name of the ingredient (lowercase, stripped)
-        category (str): The food category this ingredient belongs to
+    The class includes methods to clean ingredient names, auto-detect categories, and compare ingredients.
+    Categories include: proteins, carbs, produce, dairy, pantry.
     """
     
     # Simplified ingredient categories (5 main groups)
@@ -56,26 +53,13 @@ class Ingredient:
     }
     
     def __init__(self, name: str, category: Optional[str] = None):
-        """
-        Initialize an Ingredient.
-        
-        Args:
-            name (str): The ingredient name
-            category (str, optional): The food category. If None, will be auto-detected.
-        """
+        # Clean the ingredient name and auto-detect category if not provided
         self.name = self._clean_ingredient_name(name)
         self.category = category.lower() if category else self._detect_category()
     
     def _clean_ingredient_name(self, ingredient_str: str) -> str:
-        """
-        Clean ingredient string to extract just the ingredient name.
-        
-        Args:
-            ingredient_str: Raw ingredient string (e.g., "2 cups all-purpose flour")
-        
-        Returns:
-            str: Cleaned ingredient name (e.g., "flour")
-        """
+       #Clean ingredient string to extract just the ingredient name.
+       
         ingredient = ingredient_str.lower().strip()
         
         # Remove measurements at the beginning
@@ -98,18 +82,13 @@ class Ingredient:
         ingredient = re.sub(r'\s+', ' ', ingredient).strip()
         ingredient = ingredient.strip(',').strip()
         
-        return ingredient if ingredient else ingredient_str.lower().strip()
+        return ingredient if ingredient else ingredient_str.lower().strip() #If cleaning results in an empty string, return the original lowercased string as a fallback
     
     def _detect_category(self) -> str:
-        """
-        Automatically detect the category of an ingredient.
-        
-        Returns:
-            str: The detected category name
-        """
+       #Auto-detect the category of the ingredient based on its name using the predefined categories.
         name_lower = self.name.lower()
         
-        for category, ingredients in self.CATEGORIES.items():
+        for category, ingredients in self.CATEGORIES.items(): #Check for exact matches first
             if name_lower in ingredients:
                 return category
             
@@ -120,12 +99,10 @@ class Ingredient:
         
         return 'pantry'  # Default to pantry instead of 'other'
     
-    def __repr__(self) -> str:
-        """Developer-friendly string representation."""
+    def __repr__(self) -> str: #String representation for debugging
         return f"Ingredient(name='{self.name}', category='{self.category}')"
     
-    def __str__(self) -> str:
-        """User-friendly string representation."""
+    def __str__(self) -> str: #User-friendly string representation (just the name)
         return self.name
     
     def __eq__(self, other) -> bool:
@@ -143,11 +120,9 @@ class Ingredient:
 
 class IngredientManager:
     """
-    Manages a collection of ingredients organized by categories.
-    
-    Attributes:
-        ingredients (dict): Dictionary mapping categories to lists of Ingredient objects
-    """
+Manages a collection of ingredients organized by category. 
+Provides methods to add ingredients, retrieve them by category, and display them in an organized manner.
+"""
     
     def __init__(self):
         """Initialize an empty IngredientManager."""
@@ -155,73 +130,41 @@ class IngredientManager:
             category: [] for category in Ingredient.CATEGORIES.keys()
         }
     
-    def add_ingredient(self, ingredient: Ingredient) -> None:
-        """
-        Add an ingredient to the appropriate category.
-        
-        Args:
-            ingredient (Ingredient): The ingredient to add
-        """
+    def add_ingredient(self, ingredient: Ingredient) -> None: #Adds a single ingredient to the appropriate category list
         if ingredient.category in self.ingredients:
-            # Avoid duplicates
+            #Avoid duplicates
             if ingredient not in self.ingredients[ingredient.category]:
                 self.ingredients[ingredient.category].append(ingredient)
         else:
-            # If category doesn't exist, add to 'pantry'
+            #If category doesn't exist, add to 'pantry'
             if ingredient not in self.ingredients['pantry']:
                 self.ingredients['pantry'].append(ingredient)
     
-    def add_ingredients_from_list(self, ingredient_names: List[str]) -> None:
-        """
-        Add multiple ingredients from a list of names.
-        
-        Args:
-            ingredient_names (list): List of ingredient name strings
-        """
+    def add_ingredients_from_list(self, ingredient_names: List[str]) -> None: #Adds multiple ingredients from a list of names, auto-categorizing them
         for name in ingredient_names:
             if name and name.strip():
                 ingredient = Ingredient(name)
                 self.add_ingredient(ingredient)
     
     def get_category(self, category: str) -> List[Ingredient]:
-        """
-        Get all ingredients in a specific category.
-        
-        Args:
-            category (str): The category name
-            
-        Returns:
-            list: List of Ingredient objects in that category
-        """
+        """Get ingredients by category. Returns an empty list if the category doesn't exist or has no ingredients."""
         return self.ingredients.get(category.lower(), [])
     
     def get_all_ingredients(self) -> List[Ingredient]:
-        """
-        Get all ingredients as a flat list.
-        
-        Returns:
-            list: List of all Ingredient objects
-        """
+        """Get a flat list of all ingredients across all categories."""
         all_ingredients = []
         for category_list in self.ingredients.values():
             all_ingredients.extend(category_list)
         return all_ingredients
     
     def get_ingredient_count(self) -> int:
-        """
-        Get total number of ingredients.
-        
-        Returns:
-            int: Total ingredient count
-        """
+        """Get the total count of unique ingredients across all categories."""
         return len(self.get_all_ingredients())
     
     def get_category_counts(self) -> Dict[str, int]:
         """
         Get count of ingredients in each category.
-        
-        Returns:
-            dict: Dictionary mapping category names to counts
+        Returns a dictionary with category names as keys and counts as values, only for categories that have at least one ingredient.
         """
         return {
             category: len(ingredients) 
@@ -235,7 +178,7 @@ class IngredientManager:
         print("YOUR INGREDIENTS BY CATEGORY")
         print("="*60)
         
-        total = 0
+        total = 0 # To keep track of total ingredients across all categories
         for category, ingredients in self.ingredients.items():
             if ingredients:
                 print(f"\n{category.upper()} ({len(ingredients)}):")
@@ -258,49 +201,9 @@ class IngredientManager:
         return f"IngredientManager with {sum(counts.values())} ingredients across {len(counts)} categories"
 
 
-def get_ingredients_from_user() -> IngredientManager:
-    """
-    Interactive function to get ingredients from user input, organized by category.
-    
-    Returns:
-        IngredientManager: Manager containing all user-provided ingredients
-    """
-    print("\n" + "="*60)
-    print("INGREDIENT INPUT - What ingredients do you have?")
-    print("="*60)
-    print("\nEnter ingredients you have in each category.")
-    print("Type ingredients separated by commas, or press Enter to skip.\n")
-    
-    manager = IngredientManager()
-    
-    # Category display names
-    category_display = {
-        'proteins': 'PROTEINS (chicken, beef, fish, eggs, beans, tofu, etc.)',
-        'carbs': 'CARBS (rice, pasta, bread, potatoes, flour, etc.)',
-        'produce': 'PRODUCE (vegetables & fruits - tomatoes, lettuce, onion, lemon, etc.)',
-        'dairy': 'DAIRY (milk, cheese, butter, yogurt, cream, etc.)',
-        'pantry': 'PANTRY (oils, spices, sauces, sugar, broth, etc.)'
-    }
-    
-    for category in Ingredient.CATEGORIES.keys():
-        display_name = category_display.get(category, category.upper())
-        user_input = input(f"\n{display_name}:\n> ").strip()
-        
-        if user_input:
-            ingredient_names = [name.strip() for name in user_input.split(',') if name.strip()]
-            for name in ingredient_names:
-                ingredient = Ingredient(name, category)
-                manager.add_ingredient(ingredient)
-    
-    return manager
-
-
 def quick_ingredient_input() -> IngredientManager:
     """
     Simplified ingredient input - just comma-separated list with auto-categorization.
-    
-    Returns:
-        IngredientManager: Manager with auto-categorized ingredients
     """
     print("\n" + "="*60)
     print("QUICK INGREDIENT INPUT")
@@ -312,7 +215,7 @@ def quick_ingredient_input() -> IngredientManager:
     
     manager = IngredientManager()
     
-    if user_input:
+    if user_input: # Only process if the user entered something
         ingredient_names = [name.strip() for name in user_input.split(',') if name.strip()]
         manager.add_ingredients_from_list(ingredient_names)
     
@@ -321,18 +224,13 @@ def quick_ingredient_input() -> IngredientManager:
 
 def load_ingredients_from_csv(csv_filepath: str) -> List[str]:
     """
-    Load all unique ingredients from the CSV file using read_csv.py
-    
-    Args:
-        csv_filepath: Path to the recipe CSV file
-    
-    Returns:
-        List of unique ingredient names from the dataset
+    Load all unique ingredients from the CSV file using read_csv.py's extract_all_ingredients function.
+    This function serves as a bridge to get ingredient data from the CSV for use in the ingredient manager or for other purposes.
     """
     try:
         from scr.diet_filters import extract_all_ingredients
         ingredients = extract_all_ingredients(csv_filepath, sample_size=1000)
-        return sorted(list(ingredients))
+        return sorted(list(ingredients)) 
     except ImportError:
         print("Warning: read_csv.py not found. Cannot load ingredients from CSV.")
         return []
@@ -340,15 +238,4 @@ def load_ingredients_from_csv(csv_filepath: str) -> List[str]:
         print(f"Error loading ingredients from CSV: {e}")
         return []
 
-
-# Main execution block for testing
-if __name__ == "__main__":
-    """
-    This runs when you execute ingredients.py directly.
-    Your teammate will import this module, not run it directly.
-    """
-    
-    # Get ingredients from user (category-based input)
-    manager = get_ingredients_from_user()
-    manager.display_by_category()
     
