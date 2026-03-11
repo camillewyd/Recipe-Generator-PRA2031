@@ -45,7 +45,7 @@ plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.tight_layout()
-plt.show()
+
 
 
 #Graph 2: Repipes vs healthiness level 
@@ -109,7 +109,7 @@ plt.tight_layout()
 legend_elements = [Patch(facecolor=color, label=level) for level, color in color_map.items()]
 plt.legend(handles=legend_elements, title="Health Level")
 
-plt.show()
+
 
 
 #-----------------------------------
