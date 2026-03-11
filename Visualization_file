@@ -8,7 +8,7 @@ df = pd.read_csv(file_path)
 
 # Choose ingredients
 
-ingredients = ["chicken", "tomatoes", "eggs", "paprika"]  # list of ingredients
+ingredients = ["chicken", "broccoli", "paprika"]  # list of ingredients
 
 
 # Count how many selected ingredients each recipe contains
@@ -21,8 +21,6 @@ df["ingredient_matches"] = df["ingredients"].apply(count_ingredients)
 # Filter recipes that have at least one of the ingredients
 
 filtered_df = df[df["ingredient_matches"] > 0]
-
-
 # Sort by number of matches and then by healthiness_score
 
 top_10 = (
@@ -44,14 +42,15 @@ plt.ylabel("Number of steps")
 plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
+plt.yticks(range(0, 21, 4))
 plt.tight_layout()
-plt.ylim(0,100)
 
 #--------------------------------------
 #Graph 2: Repipes vs healthiness level 
 #--------------------------------------
 
 # Create health_level based on healthiness_score
+
 def classify_health(score):
     if score >= 80:
         return "Healthy"
@@ -62,6 +61,7 @@ def classify_health(score):
 
 top_10["health_level"] = top_10["healthiness_score"].apply(classify_health)
 
+
 # Map health levels to colors
 color_map = {
     "Healthy": "green",
@@ -69,8 +69,8 @@ color_map = {
     "Unhealthy": "red"
 }
 bar_colors = top_10["health_level"].map(color_map)
-
 # Plot Recipe vs Health Score with color by health level
+
 plt.figure(figsize=(12,6))
 bars = plt.bar(top_10["recipe_title"], top_10["healthiness_score"], color=bar_colors)
 
@@ -78,24 +78,48 @@ plt.xlabel("Recipe Title")
 plt.ylabel("Healthiness Score")
 plt.title(f"Health level of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
+plt.yticks(range(0, 101, 20))
 plt.tight_layout()
-plt.ylim(0,100)
 
 legend_elements = [Patch(facecolor=color, label=level) for level, color in color_map.items()]
 plt.legend(handles=legend_elements, title="Health Level")
 
+
 #-----------------------------------
-# Graph 3: cooking speed
+# Graph 3: cooking time
 #-----------------------------------
+# classify cooking time
+def classify_time(time):
+    if time < 60:
+        return "Fast"
+    elif time < 120:
+        return "Medium"
+    else:
+        return "Slow"
+
+# create category column
+top_10["cook_speed"] = top_10["est_cook_time_min"].apply(classify_time)
+
+# color mapping
+time_color_map = {
+    "Fast": "green",
+    "Medium": "orange",
+    "Slow": "red"
+}
+
+time_colors = top_10["cook_speed"].map(time_color_map)
 
 plt.figure(figsize=(12,6))
-bars = plt.bar(top_10["recipe_title"], top_10["est_cook_time_min"])
-
+bars = plt.bar(top_10["recipe_title"], top_10["est_cook_time_min"], color=time_colors)
 plt.xlabel("Recipe Title")
 plt.ylabel("Cooking time (min)")
 plt.title(f"Cooking time of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
+plt.yticks(range(0, 201,60))
 plt.tight_layout()
-plt.ylim(0,200)
+
+# legend for cooking speed
+legend_elements = [Patch(facecolor=color, label=level) for level, color in time_color_map.items()]
+plt.legend(handles=legend_elements, title="Cooking Speed")
 
 plt.show()
