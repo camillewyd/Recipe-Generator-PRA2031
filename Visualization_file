@@ -124,3 +124,5 @@ plt.ylabel("Cooking time (min)")
 plt.title(f"Cooking time of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
+
+plt.show()
