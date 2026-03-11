@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 # Load dataset
 file_path = "filtered_recipes(10columns).csv"  # change path if needed
@@ -10,7 +11,7 @@ df = pd.read_csv(file_path)
 
 # Choose ingredients
 
-ingredients = ["chicken", "broccoli", "garlic","paprica"]  # list of ingredients
+ingredients = ["chicken", "tomatoes", "eggs", "paprika"]  # list of ingredients
 
 
 # Count how many selected ingredients each recipe contains
@@ -47,33 +48,11 @@ plt.xticks(rotation=75)
 plt.tight_layout()
 
 
-
+#--------------------------------------
 #Graph 2: Repipes vs healthiness level 
+#--------------------------------------
 
-# Choose multiple ingredients
 
-ingredients = ["buter", "eggs", "sugar"]  # list of ingredients
-
-# Count how many selected ingredients each recipe contains
-
-def count_ingredients(recipe_ingredients):
-    recipe_ingredients_lower = str(recipe_ingredients).lower()
-    return sum(ingredient.lower() in recipe_ingredients_lower for ingredient in ingredients)
-
-df["ingredient_matches"] = df["ingredients"].apply(count_ingredients)
-
-# Filter recipes that have at least one of the ingredients
-
-filtered_df = df[df["ingredient_matches"] > 0]
-
-# Sort by number of matches and then by healthiness_score
-
-top_10 = (
-    filtered_df
-    .sort_values(by=["ingredient_matches", "healthiness_score"], ascending=[False, False])
-    .drop_duplicates(subset="recipe_title")
-    .head(10)
-)
 # Create health_level based on healthiness_score
 
 def classify_health(score):
@@ -126,3 +105,4 @@ plt.xticks(rotation=75)
 plt.tight_layout()
 
 plt.show()
+
