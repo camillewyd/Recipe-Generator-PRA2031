@@ -6,8 +6,6 @@ from matplotlib.patches import Patch
 file_path = "filtered_recipes(10columns).csv"  # change path if needed
 df = pd.read_csv(file_path)
 
-#Graph 1: Recipes vs number of steps 
-
 # Choose ingredients
 
 ingredients = ["chicken", "tomatoes", "eggs", "paprika"]  # list of ingredients
@@ -34,7 +32,9 @@ top_10 = (
     .head(10)
 )
 
-# Plot Recipe vs Health Score
+#------------------------------------
+#Graph 1: Recipes vs number of steps 
+#------------------------------------
 
 plt.figure(figsize=(10,6))
 plt.bar(top_10["recipe_title"], top_10["num_steps"], color='skyblue')
@@ -45,15 +45,13 @@ plt.title(f"Cooking steps of repipes containing: {', '.join(ingredients)}")
 
 plt.xticks(rotation=75)
 plt.tight_layout()
-
+plt.ylim(0,100)
 
 #--------------------------------------
 #Graph 2: Repipes vs healthiness level 
 #--------------------------------------
 
-
 # Create health_level based on healthiness_score
-
 def classify_health(score):
     if score >= 80:
         return "Healthy"
@@ -64,7 +62,6 @@ def classify_health(score):
 
 top_10["health_level"] = top_10["healthiness_score"].apply(classify_health)
 
-
 # Map health levels to colors
 color_map = {
     "Healthy": "green",
@@ -74,7 +71,6 @@ color_map = {
 bar_colors = top_10["health_level"].map(color_map)
 
 # Plot Recipe vs Health Score with color by health level
-
 plt.figure(figsize=(12,6))
 bars = plt.bar(top_10["recipe_title"], top_10["healthiness_score"], color=bar_colors)
 
@@ -83,12 +79,10 @@ plt.ylabel("Healthiness Score")
 plt.title(f"Health level of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
+plt.ylim(0,100)
 
 legend_elements = [Patch(facecolor=color, label=level) for level, color in color_map.items()]
 plt.legend(handles=legend_elements, title="Health Level")
-
-
-
 
 #-----------------------------------
 # Graph 3: cooking speed
@@ -102,6 +96,6 @@ plt.ylabel("Cooking time (min)")
 plt.title(f"Cooking time of repipes containing: {', '.join(ingredients)}")
 plt.xticks(rotation=75)
 plt.tight_layout()
+plt.ylim(0,200)
 
 plt.show()
-
