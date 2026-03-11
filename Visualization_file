@@ -7,7 +7,6 @@ file_path = "filtered_recipes(10columns).csv"  # change path if needed
 df = pd.read_csv(file_path)
 
 #Graph 1: Recipes vs number of steps 
-#Example with chicken, broccoli, garlic and paprica
 
 # Choose ingredients
 
